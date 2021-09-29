@@ -22,9 +22,9 @@ int main(void){
  */
 
 void PORT_INIT(void){
-	DDRB |= (1<<PB4)|(1<<PB5)|(1<<PB7);		///< Set MOSI, SCK and SS pins to output.
-	DDRB &= ~(1<<PB6);							///< Set MISO pin to input.
-	PORTB &= ~(1<<PB4);						///< Set SS pin logic LOW to turn on the slave device.
+	DDRB |= (1<<PB4)|(1<<PB5)|(1<<PB7);			///< Set MOSI, SCK and SS pins to output.
+	DDRB &= ~(1<<PB6);					///< Set MISO pin to input.
+	PORTB &= ~(1<<PB4);					///< Set SS pin logic LOW to turn on the slave device.
 }
 
 /*!
@@ -32,7 +32,7 @@ void PORT_INIT(void){
  */
 
 void SPI_MASTER_INIT(void){
-	SPCR = (1<<SPE)|(1<<MSTR)|(1<<SPR0);		///< Enable SPI, select Master SPI mode and set SCK frequency to Fosc/16.
+	SPCR = (1<<SPE)|(1<<MSTR)|(1<<SPR0);			///< Enable SPI, select Master SPI mode and set SCK frequency to Fosc/16.
 }
 
 /*!
@@ -42,7 +42,7 @@ void SPI_MASTER_INIT(void){
  */
 
 char SPI_DATA_EXCHANGE(char databyte){
-	SPDR = databyte;							///< Load the data byte to the SPDR shift register to transmit.
+	SPDR = databyte;					///< Load the data byte to the SPDR shift register to transmit.
 	while(!(SPSR & (1<<SPIF)));				///< Wait until the full data byte is received.
-	return SPDR;								///< Return the received databyte.
+	return SPDR;						///< Return the received databyte.
 }
